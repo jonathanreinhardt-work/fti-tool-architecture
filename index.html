@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#faf9f6;font-family:"DM Sans",sans-serif;padding:1rem 2rem;}
+.ph{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1.5px solid #1a1a18;padding-bottom:.5rem;margin-bottom:.4rem;}
+.ph-title{font-family:"Libre Baskerville",serif;font-size:1rem;font-weight:700;}
+.ph-sub{font-size:.58rem;color:#4a4a46;letter-spacing:.08em;text-transform:uppercase;}
+</style><style id="diag-toggle-css">
+.diag-toggle-bar{display:flex;align-items:center;gap:0;border:1.5px solid #d4d0c8;border-radius:4px;width:fit-content;overflow:hidden;margin-bottom:.6rem;}
+.diag-tier-btn{padding:5px 20px;font-family:"DM Mono",monospace;font-size:.68rem;font-weight:600;cursor:pointer;border:none;border-right:1px solid #d4d0c8;background:#f5f3ee;color:#8a8a84;letter-spacing:.05em;transition:background .12s,color .12s;}
+.diag-tier-btn:last-child{border-right:none;}
+.diag-tier-btn.active{color:#fff;}
+.diag-tier-btn.mvp.active{background:#2d3a4a;}
+.diag-tier-btn.med.active{background:#B45309;}
+.diag-tier-btn.end.active{background:#085041;}
+.diag-tier-note{font-size:.54rem;color:#8a8a84;font-style:italic;margin-bottom:.4rem;font-family:"DM Mono",monospace;}
+</style>
+</head><body>
+<div class="ph">
+  <div class="ph-title">FTI Architecture — Tooling (Diagram D)</div>
+  <div class="ph-sub">RPC · CFA Institute · April 2026 · Working Draft — tool assignments pending Fisher &amp; Fidler review</div>
+</div>
+<div id="diag-toggle-wrap" style="padding:.4rem 0 0 0;">
+  <div class="diag-toggle-bar">
+    <button class="diag-tier-btn mvp">MVP</button>
+    <button class="diag-tier-btn med">MED</button>
+    <button class="diag-tier-btn end active">End State</button>
+  </div>
+  <div class="diag-tier-note" id="diag-tier-note">End State — full AI-enabled system</div>
+</div><svg width="1900" height="1356" viewBox="0 0 1900 1356">
+<defs>
+  <marker id="afwd"  markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#64748b"/></marker>
+  <marker id="asig"  markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#1D9E75"/></marker>
+  <marker id="afb"   markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#B45309"/></marker>
+  <marker id="aprod" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#4f46e5"/></marker>
+  <marker id="apiq"  markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#92400e"/></marker>
+  <marker id="aalert" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#dc2626"/></marker>
+  <marker id="awb"   markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#9d174d"/></marker>
+</defs>
+
+<rect x="0" y="48" width="1900" height="70" fill="#f6fef9" stroke="#e2e0d8" stroke-width="1"/>
+<text x="5" y="57" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" letter-spacing=".09em" fill="#9a9a94">ZONE 1 — SIGNAL SOURCES</text>
+<rect x="0" y="158" width="1900" height="60" fill="#f5f8ff" stroke="#e2e0d8" stroke-width="1"/>
+<text x="5" y="167" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" letter-spacing=".09em" fill="#9a9a94">ZONE 1.5 — PULL & SCHEDULE</text>
+<rect x="0" y="302" width="1900" height="114" fill="#f8fafc" stroke="#e2e0d8" stroke-width="1"/>
+<text x="5" y="311" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" letter-spacing=".09em" fill="#9a9a94">ZONE 2 — PRE-PROCESSING & ORCHESTRATION</text>
+<rect x="0" y="560" width="1900" height="152" fill="#f8fafc" stroke="#e2e0d8" stroke-width="1"/>
+<text x="5" y="569" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" letter-spacing=".09em" fill="#9a9a94">ZONE 3 — PROCESSING LAYER</text>
+<rect x="0" y="784" width="1900" height="60" fill="#f0fdf8" stroke="#e2e0d8" stroke-width="1"/>
+<text x="5" y="793" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" letter-spacing=".09em" fill="#2d6a4f">ZONE 4 — INTELLIGENCE REPOSITORY</text>
+<rect x="0" y="912" width="1900" height="200" fill="#f9fafb" stroke="#e2e0d8" stroke-width="1"/>
+<text x="5" y="921" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" letter-spacing=".09em" fill="#9a9a94">ZONE 5 + 5.5 — FUNCTION OUTPUTS & INTERFACES</text>
+<rect x="0" y="1224" width="1900" height="66" fill="#f5f3ff" stroke="#e2e0d8" stroke-width="1"/>
+<text x="5" y="1233" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" letter-spacing=".09em" fill="#4f46e5">ZONE 6 — DISTRIBUTION</text>
+
+
+<text x="230.0" y="944" text-anchor="middle" dominant-baseline="middle" font-family="DM Sans,sans-serif" font-size="7.5" font-weight="600" fill="#8a8a84">Foresight</text>
+<line x1="140.0" y1="951" x2="320.0" y2="951" stroke="#d4d0c8" stroke-width="0.8"/>
+<text x="470.0" y="944" text-anchor="middle" dominant-baseline="middle" font-family="DM Sans,sans-serif" font-size="7.5" font-weight="600" fill="#8a8a84">Sprint Ops</text>
+<line x1="380.0" y1="951" x2="560.0" y2="951" stroke="#d4d0c8" stroke-width="0.8"/>
+<text x="710.0" y="944" text-anchor="middle" dominant-baseline="middle" font-family="DM Sans,sans-serif" font-size="7.5" font-weight="600" fill="#8a8a84">Research & Q&A</text>
+<line x1="620.0" y1="951" x2="800.0" y2="951" stroke="#d4d0c8" stroke-width="0.8"/>
+<text x="950.0" y="944" text-anchor="middle" dominant-baseline="middle" font-family="DM Sans,sans-serif" font-size="7.5" font-weight="600" fill="#8a8a84">Selection</text>
+<line x1="860.0" y1="951" x2="1040.0" y2="951" stroke="#d4d0c8" stroke-width="0.8"/>
+<text x="1190.0" y="944" text-anchor="middle" dominant-baseline="middle" font-family="DM Sans,sans-serif" font-size="7.5" font-weight="600" fill="#8a8a84">Content & Amp</text>
+<line x1="1100.0" y1="951" x2="1280.0" y2="951" stroke="#d4d0c8" stroke-width="0.8"/>
+<text x="1430.0" y="944" text-anchor="middle" dominant-baseline="middle" font-family="DM Sans,sans-serif" font-size="7.5" font-weight="600" fill="#8a8a84">Monitoring</text>
+<line x1="1340.0" y1="951" x2="1520.0" y2="951" stroke="#d4d0c8" stroke-width="0.8"/>
+<text x="1670.0" y="944" text-anchor="middle" dominant-baseline="middle" font-family="DM Sans,sans-serif" font-size="7.5" font-weight="600" fill="#8a8a84">AI Implementation</text>
+<line x1="1580.0" y1="951" x2="1760.0" y2="951" stroke="#d4d0c8" stroke-width="0.8"/>
+<rect x="0" y="118" width="1900" height="40" fill="#ede9d8" opacity="0.22"/>
+<text x="5" y="126" font-family="DM Mono,monospace" font-size="6" fill="#c0b8a8">LANE A</text>
+<rect x="0" y="222" width="1900" height="80" fill="#ede9d8" opacity="0.22"/>
+<text x="5" y="230" font-family="DM Mono,monospace" font-size="6" fill="#c0b8a8">LANE B</text>
+<rect x="0" y="416" width="1900" height="144" fill="#ede9d8" opacity="0.22"/>
+<text x="5" y="424" font-family="DM Mono,monospace" font-size="6" fill="#c0b8a8">LANE C</text>
+<rect x="0" y="712" width="1900" height="72" fill="#ede9d8" opacity="0.22"/>
+<text x="5" y="720" font-family="DM Mono,monospace" font-size="6" fill="#c0b8a8">LANE D</text>
+<rect x="0" y="844" width="1900" height="68" fill="#ede9d8" opacity="0.22"/>
+<text x="5" y="852" font-family="DM Mono,monospace" font-size="6" fill="#c0b8a8">LANE E</text>
+<rect x="0" y="1112" width="1900" height="112" fill="#ede9d8" opacity="0.22"/>
+<text x="5" y="1120" font-family="DM Mono,monospace" font-size="6" fill="#c0b8a8">LANE F</text>
+<path d="M297.0,114.0 L297.0,134.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M623.5,114.0 L623.5,134.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M950.0,114.0 L950.0,134.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M1276.5,114.0 L1276.5,134.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M280.0,134.0 L1276.5,134.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M280.0,134.0 L280.0,176.0" fill="none" stroke="#1D9E75" stroke-width="1.3" marker-end="url(#asig)"/>
+<text x="786.8" y="125.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#1D9E75">signals</text>
+<path d="M1760.0,83.0 L1772.0,83.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M1772.0,83.0 L1772.0,252.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M1772.0,252.0 L280.0,252.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M280.0,222.0 L280.0,252.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M950.0,222.0 L950.0,252.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M950.0,252.0 L280.0,252.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M280.0,252.0 L280.0,318.0" fill="none" stroke="#1D9E75" stroke-width="1.3" marker-end="url(#asig)"/>
+<text x="302.0" y="285.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#1D9E75">signals</text>
+<path d="M1620.0,222.0 L1620.0,262.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M1620.0,262.0 L1285.0,262.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M1285.0,262.0 L1285.0,399.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M1285.0,399.0 L1090.0,399.0" fill="none" stroke="#64748b" stroke-width="1.3" marker-end="url(#afwd)"/>
+
+<path d="M420.0,347.0 L810.0,347.0" fill="none" stroke="#1D9E75" stroke-width="1.3" marker-end="url(#asig)"/>
+<text x="615.0" y="339.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="8" fill="#1D9E75">OCR</text>
+<path d="M420.0,335.0 L426.0,335.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M426.0,335.0 L426.0,270.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M426.0,270.0 L1170.0,270.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M1170.0,270.0 L1170.0,333.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M1170.0,333.0 L1480.0,333.0" fill="none" stroke="#1D9E75" stroke-width="1.3" marker-end="url(#asig)"/>
+
+<path d="M280.0,364.0 L280.0,376.0" fill="none" stroke="#1D9E75" stroke-width="1.3" marker-end="url(#asig)"/>
+<text x="330.0" y="370.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="8" fill="#1D9E75">Governed-class</text>
+<path d="M420.0,399.0 L428.0,399.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M428.0,399.0 L428.0,384.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M428.0,384.0 L810.0,384.0" fill="none" stroke="#64748b" stroke-width="1.3" marker-end="url(#afwd)"/>
+<text x="436.0" y="391.5" text-anchor="start" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#8a8a84">authorization</text>
+<path d="M420.0,341.0 L434.0,341.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M434.0,341.0 L434.0,282.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M434.0,282.0 L1140.0,282.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M1140.0,282.0 L1140.0,387.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M1140.0,387.0 L1480.0,387.0" fill="none" stroke="#1D9E75" stroke-width="1.3" marker-end="url(#asig)"/>
+
+<path d="M420.0,399.0 L428.0,399.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M428.0,399.0 L428.0,440.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M428.0,440.0 L1620.0,440.0" fill="none" stroke="#64748b" stroke-width="1.3"/>
+<path d="M1620.0,440.0 L1620.0,421.0" fill="none" stroke="#64748b" stroke-width="1.3" marker-end="url(#afwd)"/>
+<text x="490.0" y="448.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#8a8a84">no authorization (72h timeout)</text>
+<path data-feedback="PP5_I7" data-fb-tier="med" d="M1760.0,399.0 L1838.0,399.0 L1838.0,1008.0 L1760.0,1008.0" fill="none" stroke="#dc2626" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#aalert)"/>
+
+<text x="1770.0" y="392.0" text-anchor="start" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#dc2626">DLQ status</text>
+<path d="M140.0,341.0 L48.0,341.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M48.0,341.0 L48.0,605.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M48.0,605.0 L140.0,605.0" fill="none" stroke="#1D9E75" stroke-width="1.3" marker-end="url(#asig)"/>
+<text x="56.0" y="361.0" text-anchor="start" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#1D9E75">direct pass</text>
+<path d="M1090.0,341.0 L1120.0,341.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M1120.0,341.0 L1120.0,524.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M1480.0,349.0 L1450.0,349.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M1450.0,349.0 L1450.0,524.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M1450.0,524.0 L48.0,524.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+
+<text x="1442.0" y="531.0" text-anchor="end" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7" fill="#1D9E75">transcript JSON</text>
+<path d="M810.0,414.0 L480.0,414.0" fill="none" stroke="#64748b" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path d="M480.0,414.0 L480.0,357.0" fill="none" stroke="#64748b" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path d="M480.0,357.0 L420.0,357.0" fill="none" stroke="#64748b" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path d="M420.0,357.0 L419.0,357.0" fill="none" stroke="#64748b" stroke-width="1.3" marker-end="url(#afwd)" stroke-dasharray="4,3"/>
+<text x="488.0" y="406.0" text-anchor="start" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#64748b">re-routing trigger</text>
+<path d="M965.0,422.0 L965.0,492.0" fill="none" stroke="#64748b" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path d="M965.0,492.0 L1290.0,492.0" fill="none" stroke="#64748b" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path d="M1290.0,492.0 L1290.0,582.0" fill="none" stroke="#64748b" stroke-width="1.3" marker-end="url(#afwd)" stroke-dasharray="4,3"/>
+
+<path d="M1190.0,1076.0 L1190.0,1178.0" fill="none" stroke="#4f46e5" stroke-width="1.3"/>
+<path d="M250.0,1178.0 L1300.0,1178.0" fill="none" stroke="#4f46e5" stroke-width="1.3"/>
+<path d="M250.0,1178.0 L250.0,1242.0" fill="none" stroke="#4f46e5" stroke-width="1.3" marker-end="url(#aprod)"/>
+<path d="M564.0,1178.0 L564.0,1242.0" fill="none" stroke="#4f46e5" stroke-width="1.3" marker-end="url(#aprod)"/>
+<path d="M914.0,1178.0 L914.0,1242.0" fill="none" stroke="#4f46e5" stroke-width="1.3" marker-end="url(#aprod)"/>
+<path d="M564.0,1178.0 L564.0,1242.0" fill="none" stroke="#4f46e5" stroke-width="1.3" marker-end="url(#aprod)"/>
+<path d="M914.0,1178.0 L914.0,1242.0" fill="none" stroke="#4f46e5" stroke-width="1.3" marker-end="url(#aprod)"/>
+<path d="M1300.0,1178.0 L1300.0,1242.0" fill="none" stroke="#4f46e5" stroke-width="1.3" marker-end="url(#aprod)"/>
+<text x="775.0" y="1171.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#4f46e5">amplified content</text>
+<path d="M250.0,1284.0 L250.0,1306.0" fill="none" stroke="#4f46e5" stroke-width="1.3"/>
+<path d="M564.0,1284.0 L564.0,1306.0" fill="none" stroke="#4f46e5" stroke-width="1.3"/>
+<path data-feedback="D2D3_SE" data-fb-tier="med" d="M636.0,1284.0 L636.0,1320.0" fill="none" stroke="#9d174d" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path d="M914.0,1284.0 L914.0,1306.0" fill="none" stroke="#4f46e5" stroke-width="1.3"/>
+<path data-feedback="D2D3_SE" data-fb-tier="med" d="M986.0,1284.0 L986.0,1320.0" fill="none" stroke="#9d174d" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path d="M250.0,1306.0 L914.0,1306.0" fill="none" stroke="#4f46e5" stroke-width="1.3"/>
+<path d="M914.0,1306.0 L1650.0,1306.0" fill="none" stroke="#4f46e5" stroke-width="1.3"/>
+<path d="M1650.0,1306.0 L1650.0,1284.0" fill="none" stroke="#4f46e5" stroke-width="1.3" marker-end="url(#aprod)"/>
+<text x="260.0" y="1299.0" text-anchor="start" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7" fill="#4f46e5">to external recipients</text>
+<path data-feedback="D2D3_SE" data-fb-tier="med" d="M636.0,1320.0 L986.0,1320.0" fill="none" stroke="#9d174d" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path data-feedback="D2D3_SE" data-fb-tier="med" d="M986.0,1320.0 L1880.0,1320.0" fill="none" stroke="#9d174d" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path data-feedback="D2D3_SE" data-fb-tier="med" d="M1880.0,1320.0 L1880.0,98.0" fill="none" stroke="#9d174d" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path data-feedback="D2D3_SE" data-fb-tier="med" d="M1880.0,98.0 L1760.0,98.0" fill="none" stroke="#9d174d" stroke-width="1.3" marker-end="url(#awb)" stroke-dasharray="4,3"/>
+<text x="994.0" y="1328.0" text-anchor="start" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#9d174d">engagement data</text>
+<text x="1875.0" y="90.0" text-anchor="end" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#9d174d">engagement data</text>
+<path data-feedback="I123_RL" data-fb-tier="med" d="M230.0,1076.0 L230.0,1134.0" fill="none" stroke="#9d174d" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path data-feedback="I123_RL" data-fb-tier="med" d="M440.0,1076.0 L440.0,1134.0" fill="none" stroke="#9d174d" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path data-feedback="I123_RL" data-fb-tier="med" d="M710.0,1076.0 L710.0,1134.0" fill="none" stroke="#9d174d" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path data-feedback="I123_RL" data-fb-tier="med" d="M710.0,1134.0 L34.0,1134.0" fill="none" stroke="#9d174d" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path data-feedback="I123_RL" data-fb-tier="med" d="M34.0,1134.0 L34.0,819.0" fill="none" stroke="#9d174d" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path data-feedback="I123_RL" data-fb-tier="med" d="M34.0,819.0 L140.0,819.0" fill="none" stroke="#9d174d" stroke-width="1.3" marker-end="url(#awb)" stroke-dasharray="4,3"/>
+<text x="42.0" y="1128.0" text-anchor="start" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#9d174d">analyst overrides</text>
+<path d="M935.0,422.0 L935.0,508.0" fill="none" stroke="#64748b" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path d="M935.0,508.0 L20.0,508.0" fill="none" stroke="#64748b" stroke-width="1.3" stroke-dasharray="4,3"/>
+
+<path d="M20.0,508.0 L20.0,1200.0" fill="none" stroke="#64748b" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path d="M20.0,1200.0 L986.0,1200.0" fill="none" stroke="#64748b" stroke-width="1.3" stroke-dasharray="4,3"/>
+<text x="42.0" y="1193.0" text-anchor="start" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#64748b">gate approval / threshold → distribute</text>
+<path d="M286.0,1200.0 L286.0,1242.0" fill="none" stroke="#64748b" stroke-width="1.3" marker-end="url(#afwd)" stroke-dasharray="4,3"/>
+<path d="M636.0,1200.0 L636.0,1242.0" fill="none" stroke="#64748b" stroke-width="1.3" marker-end="url(#afwd)" stroke-dasharray="4,3"/>
+<path d="M986.0,1200.0 L986.0,1242.0" fill="none" stroke="#64748b" stroke-width="1.3" marker-end="url(#afwd)" stroke-dasharray="4,3"/>
+<path d="M400.0,605.0 L480.0,605.0" fill="none" stroke="#64748b" stroke-width="1.3" marker-end="url(#afwd)"/>
+<text x="440.0" y="616.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7" fill="#94a3b8">normalize</text>
+<path d="M740.0,605.0 L820.0,605.0" fill="none" stroke="#64748b" stroke-width="1.3" marker-end="url(#afwd)"/>
+<text x="780.0" y="616.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7" fill="#94a3b8">tag+classify</text>
+<path d="M1080.0,605.0 L1160.0,605.0" fill="none" stroke="#64748b" stroke-width="1.3" marker-end="url(#afwd)"/>
+<text x="1120.0" y="616.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7" fill="#94a3b8">PIQ score</text>
+<path d="M1420.0,605.0 L1500.0,605.0" fill="none" stroke="#64748b" stroke-width="1.3" marker-end="url(#afwd)"/>
+<text x="1460.0" y="616.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7" fill="#94a3b8">QA+dedup</text>
+<path data-feedback="PIQ_RL" data-fb-tier="all" d="M1285.0,642.0 L1285.0,628.0" fill="none" stroke="#92400e" stroke-width="1.3" marker-end="url(#apiq)" stroke-dasharray="4,3"/>
+<path data-feedback="PIQ_RL" data-fb-tier="all" d="M1295.0,628.0 L1295.0,642.0" fill="none" stroke="#92400e" stroke-width="1.3" marker-end="url(#apiq)" stroke-dasharray="4,3"/>
+<path d="M1760.0,605.0 L1802.0,605.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M1802.0,605.0 L1802.0,730.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M1802.0,730.0 L300.0,730.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M300.0,730.0 L300.0,798.0" fill="none" stroke="#1D9E75" stroke-width="1.3" marker-end="url(#asig)"/>
+<path d="M950.0,730.0 L950.0,798.0" fill="none" stroke="#1D9E75" stroke-width="1.3" marker-end="url(#asig)"/>
+<path d="M1620.0,730.0 L1620.0,798.0" fill="none" stroke="#1D9E75" stroke-width="1.3" marker-end="url(#asig)"/>
+<text x="1794.0" y="723.0" text-anchor="end" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#1D9E75">QA-verified records</text>
+<path data-feedback="PIQ_RL" data-fb-tier="all" d="M1160.0,665.0 L1152.0,665.0" fill="none" stroke="#92400e" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path data-feedback="PIQ_RL" data-fb-tier="all" d="M1152.0,665.0 L1152.0,748.0" fill="none" stroke="#92400e" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path data-feedback="PIQ_RL" data-fb-tier="all" d="M1152.0,748.0 L320.0,748.0" fill="none" stroke="#92400e" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path data-feedback="PIQ_RL" data-fb-tier="all" d="M320.0,748.0 L320.0,798.0" fill="none" stroke="#92400e" stroke-width="1.3" marker-end="url(#apiq)" stroke-dasharray="4,3"/>
+
+<path d="M280.0,840.0 L280.0,858.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M230.0,858.0 L1430.0,858.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M280.0,858.0 L230.0,858.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M230.0,858.0 L230.0,956.0" fill="none" stroke="#1D9E75" stroke-width="1.3" marker-end="url(#asig)"/>
+<path d="M470.0,858.0 L470.0,956.0" fill="none" stroke="#1D9E75" stroke-width="1.3" marker-end="url(#asig)"/>
+<path d="M680.0,858.0 L680.0,956.0" fill="none" stroke="#1D9E75" stroke-width="1.3" marker-end="url(#asig)"/>
+<path d="M1220.0,858.0 L1220.0,956.0" fill="none" stroke="#1D9E75" stroke-width="1.3" marker-end="url(#asig)"/>
+<path d="M1430.0,858.0 L1430.0,956.0" fill="none" stroke="#1D9E75" stroke-width="1.3" marker-end="url(#asig)"/>
+<text x="288.0" y="851.0" text-anchor="start" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7" fill="#1D9E75">structured records</text>
+<path d="M950.0,840.0 L950.0,872.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M740.0,872.0 L1160.0,872.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M950.0,872.0 L740.0,872.0" fill="none" stroke="#1D9E75" stroke-width="1.3"/>
+<path d="M740.0,872.0 L740.0,956.0" fill="none" stroke="#1D9E75" stroke-width="1.3" marker-end="url(#asig)"/>
+<path d="M950.0,872.0 L950.0,956.0" fill="none" stroke="#1D9E75" stroke-width="1.3" marker-end="url(#asig)"/>
+<path d="M1160.0,872.0 L1160.0,956.0" fill="none" stroke="#1D9E75" stroke-width="1.3" marker-end="url(#asig)"/>
+<text x="958.0" y="879.0" text-anchor="start" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7" fill="#1D9E75">vector / semantic</text>
+<path d="M230.0,1002.0 L230.0,1018.0" fill="none" stroke="#1D9E75" stroke-width="1.3" marker-end="url(#asig)"/>
+<path d="M470.0,1002.0 L470.0,1018.0" fill="none" stroke="#1D9E75" stroke-width="1.3" marker-end="url(#asig)"/>
+<path d="M710.0,1002.0 L710.0,1018.0" fill="none" stroke="#1D9E75" stroke-width="1.3" marker-end="url(#asig)"/>
+<path d="M950.0,1002.0 L950.0,1018.0" fill="none" stroke="#1D9E75" stroke-width="1.3" marker-end="url(#asig)"/>
+<path d="M1190.0,1002.0 L1190.0,1018.0" fill="none" stroke="#1D9E75" stroke-width="1.3" marker-end="url(#asig)"/>
+<path d="M1430.0,1002.0 L1430.0,1018.0" fill="none" stroke="#1D9E75" stroke-width="1.3" marker-end="url(#asig)"/>
+<path data-feedback="I2_OL" data-fb-tier="all" d="M500.0,1076.0 L500.0,1156.0" fill="none" stroke="#9d174d" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path data-feedback="I2_OL" data-fb-tier="all" d="M500.0,1156.0 L12.0,1156.0" fill="none" stroke="#9d174d" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path data-feedback="I2_OL" data-fb-tier="all" d="M12.0,1156.0 L12.0,484.0" fill="none" stroke="#9d174d" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path data-feedback="I2_OL" data-fb-tier="all" d="M12.0,484.0 L903.0,484.0" fill="none" stroke="#9d174d" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path data-feedback="I2_OL" data-fb-tier="all" d="M903.0,484.0 L903.0,422.0" fill="none" stroke="#9d174d" stroke-width="1.3" marker-end="url(#awb)" stroke-dasharray="4,3"/>
+<text x="42.0" y="1150.0" text-anchor="start" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#9d174d">gate decisions</text>
+
+
+<path data-feedback="I6_OL" data-fb-tier="med" d="M1430.0,1076.0 L1430.0,1126.0" fill="none" stroke="#9d174d" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path data-feedback="I6_OL" data-fb-tier="med" d="M1430.0,1126.0 L1866.0,1126.0" fill="none" stroke="#9d174d" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path data-feedback="I6_OL" data-fb-tier="med" d="M1866.0,1126.0 L1866.0,476.0" fill="none" stroke="#9d174d" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path data-feedback="I6_OL" data-fb-tier="med" d="M1866.0,476.0 L997.0,476.0" fill="none" stroke="#9d174d" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path data-feedback="I6_OL" data-fb-tier="med" d="M997.0,476.0 L997.0,422.0" fill="none" stroke="#9d174d" stroke-width="1.3" marker-end="url(#awb)" stroke-dasharray="4,3"/>
+<text x="1435.0" y="1101.0" text-anchor="start" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#9d174d">threshold alerts</text>
+
+<g>
+  <rect x="140.0" y="68.0" data-node="SF" width="314.0" height="46" rx="3" fill="#f0fdf4" stroke="#1D9E75" stroke-width="1.5"/>
+  <text x="297.0" y="81.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Automated Feeds</text>
+  <text x="297.0" y="91.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Tier 0–1: custom pipeline · Tier 2: FIBRES / Valona</text>
+  <text x="297.0" y="101.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">FIBRES <tspan font-size="15" dominant-baseline="text-bottom">→</tspan> · Valona <tspan font-size="15" dominant-baseline="text-bottom">→</tspan> · custom pipeline <tspan font-size="15" dominant-baseline="text-bottom">⚙</tspan></text>
+</g>
+<g>
+  <rect x="466.5" y="68.0" data-node="SP" width="314.0" height="46" rx="3" fill="#f0fdf4" stroke="#1D9E75" stroke-width="1.5"/>
+  <text x="623.5" y="81.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Documents & Knowledge</text>
+  <text x="623.5" y="91.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46"></text>
+  <text x="623.5" y="101.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">SharePoint <tspan font-size="15" dominant-baseline="text-bottom">★</tspan> · Snowflake <tspan font-size="15" dominant-baseline="text-bottom">★</tspan> · scrapers <tspan font-size="15" dominant-baseline="text-bottom">⚙</tspan></text>
+</g>
+<g>
+  <rect x="793.0" y="68.0" data-node="SA" width="314.0" height="46" rx="3" fill="#f0fdf4" stroke="#1D9E75" stroke-width="1.5"/>
+  <text x="950.0" y="81.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Audio & Video *</text>
+  <text x="950.0" y="91.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Roundtables · webinars · interviews</text>
+  <text x="950.0" y="101.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Azure AI Speech <tspan font-size="15" dominant-baseline="text-bottom">→</tspan> · <tspan font-size="15" dominant-baseline="text-bottom">→</tspan> TBD (diarization)</text>
+</g>
+<g>
+  <rect x="1119.5" y="68.0" data-node="SQ" width="314.0" height="46" rx="3" fill="#f0fdf4" stroke="#1D9E75" stroke-width="1.5"/>
+  <text x="1276.5" y="81.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">CRM, Quant & Geospatial *</text>
+  <text x="1276.5" y="91.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">CRM read · structured data ingest · geospatial feeds</text>
+  <text x="1276.5" y="101.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Salesforce <tspan font-size="15" dominant-baseline="text-bottom">★</tspan> · custom pipeline <tspan font-size="15" dominant-baseline="text-bottom">⚙</tspan></text>
+</g>
+<g>
+  <rect x="1446.0" y="68.0" data-node="SE" width="314.0" height="46" rx="3" fill="#f0fdf4" stroke="#1D9E75" stroke-width="1.5"/>
+  <text x="1603.0" y="81.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Engagement & HUMINT</text>
+  <text x="1603.0" y="91.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Analytics feeds · signal card submissions</text>
+  <text x="1603.0" y="101.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">MS Forms <tspan font-size="15" dominant-baseline="text-bottom">★</tspan> · Qualtrics <tspan font-size="15" dominant-baseline="text-bottom">★</tspan></text>
+</g>
+<g>
+  <rect x="60.0" y="176.0" data-node="P1" width="440.0" height="46" rx="3" fill="#f0f5ff" stroke="#1e3a5f" stroke-width="1.5"/>
+  <text x="280.0" y="189.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Scheduled Pull Engine</text>
+  <text x="280.0" y="199.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Cadence config per source class</text>
+  <text x="280.0" y="209.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Azure Data Factory <tspan font-size="15" dominant-baseline="text-bottom">★</tspan> · Power Automate <tspan font-size="15" dominant-baseline="text-bottom">★</tspan> (notifications) · custom <tspan font-size="15" dominant-baseline="text-bottom">⚙</tspan></text>
+</g>
+<g>
+  <rect x="810.0" y="176.0" data-node="P2" width="280.0" height="46" rx="3" fill="#f0f5ff" stroke="#1e3a5f" stroke-width="1.5"/>
+  <text x="950.0" y="189.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Proactive Signal Hypothesis Engine</text>
+  <text x="950.0" y="199.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Generative queries — end state</text>
+  <text x="950.0" y="209.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Claude API <tspan font-size="15" dominant-baseline="text-bottom">★</tspan> · custom <tspan font-size="15" dominant-baseline="text-bottom">⚙</tspan></text>
+</g>
+<g>
+  <rect x="1480.0" y="176.0" data-node="P3" width="280.0" height="46" rx="3" fill="#f0f5ff" stroke="#1e3a5f" stroke-width="1.5"/>
+  <rect x="1481.5" y="177.5" width="277.0" height="11" rx="2" fill="#f0fdf4" stroke="none"/>
+  <line x1="1480.0" y1="188.5" x2="1760.0" y2="188.5" stroke="#1D9E75" stroke-width="0.8" stroke-dasharray="3,2"/>
+  <text x="1620.0" y="183.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" font-weight="500" fill="#1D9E75">▲  Continuously monitors all Zone 1  ▲</text>
+  <text x="1620.0" y="196.8" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Source Freshness Monitor</text>
+  <text x="1620.0" y="206.8" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Tracks update intervals per source</text>
+  <text x="1620.0" y="216.8" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Snowflake <tspan font-size="15" dominant-baseline="text-bottom">★</tspan> · Power Automate <tspan font-size="15" dominant-baseline="text-bottom">★</tspan> · custom <tspan font-size="15" dominant-baseline="text-bottom">⚙</tspan></text>
+</g>
+<g>
+  <rect x="140.0" y="318.0" data-node="PP1" width="280.0" height="46" rx="3" fill="#f8fafc" stroke="#475569" stroke-width="1.5"/>
+  <text x="280.0" y="331.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Format Detection & Job Routing</text>
+  <text x="280.0" y="341.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Identifies input type; routes to correct path</text>
+  <text x="280.0" y="351.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Azure Functions <tspan font-size="15" dominant-baseline="text-bottom">⚙</tspan> · Azure Service Bus <tspan font-size="15" dominant-baseline="text-bottom">★</tspan></text>
+</g>
+<g>
+  <rect x="810.0" y="318.0" data-node="PP2" width="280.0" height="46" rx="3" fill="#f8fafc" stroke="#475569" stroke-width="1.5"/>
+  <text x="950.0" y="331.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Async OCR Job</text>
+  <text x="950.0" y="341.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Text-layer · image-only · hybrid PDF</text>
+  <text x="950.0" y="351.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Azure AI Doc Intelligence <tspan font-size="15" dominant-baseline="text-bottom">→</tspan></text>
+</g>
+<g>
+  <rect x="1480.0" y="318.0" data-node="PP3" width="280.0" height="46" rx="3" fill="#f8fafc" stroke="#475569" stroke-width="1.5"/>
+  <text x="1620.0" y="331.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Async Transcription Job</text>
+  <text x="1620.0" y="341.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Audio <tspan font-size="15" dominant-baseline="text-bottom">→</tspan> diarized JSON</text>
+  <text x="1620.0" y="351.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46"><tspan font-size="15" dominant-baseline="text-bottom">→</tspan> TBD — see Tool Research Log</text>
+</g>
+<g>
+  <rect x="140.0" y="376.0" data-node="PP4" width="280.0" height="46" rx="3" fill="#fff7ed" stroke="#9f1239" stroke-width="2"/>
+  <rect x="348.0" y="375" width="70" height="10" rx="2" fill="#fef3c7" stroke="#fbbf24" stroke-width="0.8"/>
+  <text x="383.0" y="380.5" text-anchor="middle" dominant-baseline="middle" font-family="DM Sans,sans-serif" font-size="6.5" font-weight="700" fill="#92400e">HUMAN GATE</text>
+  <text x="280.0" y="389.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Governance Hold</text>
+  <text x="280.0" y="399.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">72h SLA · named-panel authorization</text>
+  <text x="280.0" y="409.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Power Automate <tspan font-size="15" dominant-baseline="text-bottom">★</tspan> · Azure Blob Storage <tspan font-size="15" dominant-baseline="text-bottom">★</tspan> · custom <tspan font-size="15" dominant-baseline="text-bottom">⚙</tspan></text>
+</g>
+<g>
+  <rect x="810.0" y="376.0" data-node="OL" width="280.0" height="46" rx="3" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="950.0" y="389.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#e2e8f0">Orchestration Layer</text>
+  <text x="950.0" y="399.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#94a3b8">Event bus · gate notifications · outbound writes</text>
+  <text x="950.0" y="409.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#94a3b8"></text>
+  <text x="950.0" y="409.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#94a3b8">Azure Service Bus <tspan font-size="15" dominant-baseline="text-bottom">★</tspan></text>
+  
+</g>
+<g>
+  <rect x="1480.0" y="376.0" data-node="PP5" width="280.0" height="46" rx="3" fill="#f8fafc" stroke="#475569" stroke-width="1.5"/>
+  <text x="1620.0" y="389.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Dead-Letter Queue</text>
+  <text x="1620.0" y="399.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Error code + retry logic</text>
+  <text x="1620.0" y="409.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Azure Service Bus <tspan font-size="15" dominant-baseline="text-bottom">★</tspan></text>
+</g>
+<g>
+  <rect x="140.0" y="582.0" data-node="M01" width="260.0" height="46" rx="3" fill="#1e293b" stroke="#94a3b8" stroke-width="1.2"/>
+  <text x="270.0" y="595.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#e2e8f0">M01 Format Extraction</text>
+  <text x="270.0" y="605.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#94a3b8">Adapter per source — tool swap = adapter update only</text>
+  <text x="270.0" y="615.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#94a3b8">Python <tspan font-size="15" dominant-baseline="text-bottom">⚙</tspan> · Azure Doc Intelligence <tspan font-size="15" dominant-baseline="text-bottom">★</tspan></text>
+</g>
+<g>
+  <rect x="480.0" y="582.0" data-node="M02" width="260.0" height="46" rx="3" fill="#1e293b" stroke="#94a3b8" stroke-width="1.2"/>
+  <text x="610.0" y="595.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#e2e8f0">M02 Normalization</text>
+  <text x="610.0" y="605.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#94a3b8">New tool = new adapter only — schema stable</text>
+  <text x="610.0" y="615.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#94a3b8">custom adapters <tspan font-size="15" dominant-baseline="text-bottom">⚙</tspan></text>
+</g>
+<g>
+  <rect x="820.0" y="582.0" data-node="M03" width="260.0" height="46" rx="3" fill="#1e293b" stroke="#94a3b8" stroke-width="1.2"/>
+  <text x="950.0" y="595.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#e2e8f0">M03 Entity Extraction & Tagging</text>
+  <text x="950.0" y="605.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#94a3b8">NER · domain classification · sensitivity tier</text>
+  <text x="950.0" y="615.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#94a3b8">Azure AI Language <tspan font-size="15" dominant-baseline="text-bottom">→</tspan> · Claude API <tspan font-size="15" dominant-baseline="text-bottom">★</tspan></text>
+</g>
+<g>
+  <rect x="1160.0" y="582.0" data-node="M04" width="260.0" height="46" rx="3" fill="#1e293b" stroke="#94a3b8" stroke-width="1.2"/>
+  <text x="1290.0" y="595.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#e2e8f0">M04 PIQ Scoring & Pre-scoring</text>
+  <text x="1290.0" y="605.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#94a3b8">A: signals<tspan font-size="15" dominant-baseline="text-bottom">→</tspan>Foresight  B: proposals<tspan font-size="15" dominant-baseline="text-bottom">→</tspan>Selection</text>
+  <text x="1290.0" y="615.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#94a3b8">Claude API <tspan font-size="15" dominant-baseline="text-bottom">★</tspan></text>
+</g>
+<g>
+  <rect x="1500.0" y="582.0" data-node="M05" width="260.0" height="46" rx="3" fill="#1e293b" stroke="#94a3b8" stroke-width="1.2"/>
+  <text x="1630.0" y="595.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#e2e8f0">M05 QA + Deduplication</text>
+  <text x="1630.0" y="605.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#94a3b8">Content fingerprinting · quality score</text>
+  <text x="1630.0" y="615.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#94a3b8">Snowflake <tspan font-size="15" dominant-baseline="text-bottom">★</tspan> · custom <tspan font-size="15" dominant-baseline="text-bottom">⚙</tspan></text>
+</g>
+<g>
+  <rect x="1160.0" y="642.0" data-node="PIQ" width="260.0" height="46" rx="3" fill="#fffbf5" stroke="#B45309" stroke-width="2"/>
+  <rect x="1348.0" y="641" width="70" height="10" rx="2" fill="#fef3c7" stroke="#fbbf24" stroke-width="0.8"/>
+  <text x="1383.0" y="646.5" text-anchor="middle" dominant-baseline="middle" font-family="DM Sans,sans-serif" font-size="6.5" font-weight="700" fill="#92400e">HUMAN-IN-LOOP</text>
+  <text x="1290.0" y="655.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">PIQ Management Interface</text>
+  <text x="1290.0" y="665.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#92400e">Human-in-loop · AI drafts from transcript</text>
+  <text x="1290.0" y="675.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#92400e">Claude Enterprise <tspan font-size="15" dominant-baseline="text-bottom">★</tspan> · custom interface <tspan font-size="15" dominant-baseline="text-bottom">⚙</tspan></text>
+</g>
+<g>
+  <rect x="140.0" y="798.0" data-node="RL1" width="280.0" height="42" rx="3" fill="#f0fdf8" stroke="#085041" stroke-width="2"/>
+  <text x="280.0" y="809.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Layer 1 — Structured Records</text>
+  <text x="280.0" y="819.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#2d6a4f"></text>
+  <text x="280.0" y="829.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#2d6a4f">Snowflake <tspan font-size="15" dominant-baseline="text-bottom">★</tspan></text>
+</g>
+<g>
+  <rect x="810.0" y="798.0" data-node="RL2" width="280.0" height="42" rx="3" fill="#f0fdf8" stroke="#085041" stroke-width="2"/>
+  <text x="950.0" y="809.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Layer 2 — Vector Store</text>
+  <text x="950.0" y="819.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#2d6a4f">Text embeddings · PIQ similarity index</text>
+  <text x="950.0" y="829.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#2d6a4f">Azure AI Search <tspan font-size="15" dominant-baseline="text-bottom">★</tspan> · Snowflake Cortex <tspan font-size="15" dominant-baseline="text-bottom">→</tspan></text>
+</g>
+<g>
+  <rect x="1480.0" y="798.0" data-node="RL3" width="280.0" height="42" rx="3" fill="#f0fdf8" stroke="#085041" stroke-width="2"/>
+  <text x="1620.0" y="809.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Layer 3 — Source Archive</text>
+  <text x="1620.0" y="819.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#2d6a4f"></text>
+  <text x="1620.0" y="829.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#2d6a4f">Azure Blob Storage <tspan font-size="15" dominant-baseline="text-bottom">★</tspan> (files) · Snowflake <tspan font-size="15" dominant-baseline="text-bottom">★</tspan> (provenance)</text>
+</g>
+<g>
+  <rect x="140.0" y="956.0" data-node="O1" width="180.0" height="46" rx="3" fill="#f8fafc" stroke="#3d4a5c" stroke-width="1.5"/>
+  <text x="230.0" y="974.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Query pull</text>
+  <text x="230.0" y="984.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Signals · PIQ coverage · house view</text>
+  <text x="230.0" y="994.0" text-anchor="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#6b7280">Snowflake API <tspan font-size="15" dominant-baseline="text-bottom">★</tspan></text>
+</g>
+<g>
+  <rect x="380.0" y="956.0" data-node="O2" width="180.0" height="46" rx="3" fill="#f8fafc" stroke="#3d4a5c" stroke-width="1.5"/>
+  <text x="470.0" y="974.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Push / event</text>
+  <text x="470.0" y="984.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Pipeline · gate records · milestone</text>
+  <text x="470.0" y="994.0" text-anchor="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#6b7280">Azure Service Bus <tspan font-size="15" dominant-baseline="text-bottom">★</tspan> · Power Automate <tspan font-size="15" dominant-baseline="text-bottom">★</tspan></text>
+</g>
+<g>
+  <rect x="620.0" y="956.0" data-node="O3" width="180.0" height="46" rx="3" fill="#f8fafc" stroke="#3d4a5c" stroke-width="1.5"/>
+  <text x="710.0" y="974.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Batch pull</text>
+  <text x="710.0" y="984.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Signal evidence · prior positions</text>
+  <text x="710.0" y="994.0" text-anchor="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#6b7280">Snowflake API <tspan font-size="15" dominant-baseline="text-bottom">★</tspan></text>
+</g>
+<g>
+  <rect x="860.0" y="956.0" data-node="O4" width="180.0" height="46" rx="3" fill="#f8fafc" stroke="#3d4a5c" stroke-width="1.5"/>
+  <text x="950.0" y="974.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Batch pull</text>
+  <text x="950.0" y="984.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Proposals · AI pre-scoring</text>
+  <text x="950.0" y="994.0" text-anchor="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#6b7280">Snowflake API <tspan font-size="15" dominant-baseline="text-bottom">★</tspan></text>
+</g>
+<g>
+  <rect x="1100.0" y="956.0" data-node="O5" width="180.0" height="46" rx="3" fill="#f8fafc" stroke="#3d4a5c" stroke-width="1.5"/>
+  <text x="1190.0" y="974.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Batch pull</text>
+  <text x="1190.0" y="984.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Manuscript · signal context</text>
+  <text x="1190.0" y="994.0" text-anchor="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#6b7280">Snowflake API <tspan font-size="15" dominant-baseline="text-bottom">★</tspan></text>
+</g>
+<g>
+  <rect x="1340.0" y="956.0" data-node="O6" width="180.0" height="46" rx="3" fill="#f8fafc" stroke="#3d4a5c" stroke-width="1.5"/>
+  <text x="1430.0" y="974.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Push / threshold</text>
+  <text x="1430.0" y="984.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Influence readings · PIQ calibration</text>
+  <text x="1430.0" y="994.0" text-anchor="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#6b7280">Snowflake API <tspan font-size="15" dominant-baseline="text-bottom">★</tspan> · Power Automate <tspan font-size="15" dominant-baseline="text-bottom">★</tspan></text>
+</g>
+<g>
+  <rect x="140.0" y="1018.0" data-node="I1" width="180.0" height="58" rx="3" fill="#eef2ff" stroke="#1e3a5f" stroke-width="1.5"/>
+  <rect x="248.0" y="1017" width="70" height="10" rx="2" fill="#fef3c7" stroke="#fbbf24" stroke-width="0.8"/>
+  <text x="283.0" y="1022.5" text-anchor="middle" dominant-baseline="middle" font-family="DM Sans,sans-serif" font-size="6.5" font-weight="700" fill="#92400e">ANALYST WORKSPACE</text>
+  <text x="230.0" y="1037.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Signal & Foresight Workspace</text>
+  <text x="230.0" y="1047.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Intelligence dashboard</text>
+  <text x="230.0" y="1057.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">FIBRES <tspan font-size="15" dominant-baseline="text-bottom">→</tspan> · Claude Enterprise <tspan font-size="15" dominant-baseline="text-bottom">★</tspan></text>
+</g>
+<g>
+  <rect x="380.0" y="1018.0" data-node="I2" width="180.0" height="58" rx="3" fill="#eef2ff" stroke="#1e3a5f" stroke-width="1.5"/>
+  <rect x="488.0" y="1017" width="70" height="10" rx="2" fill="#fef3c7" stroke="#fbbf24" stroke-width="0.8"/>
+  <text x="523.0" y="1022.5" text-anchor="middle" dominant-baseline="middle" font-family="DM Sans,sans-serif" font-size="6.5" font-weight="700" fill="#92400e">ANALYST WORKSPACE</text>
+  <text x="470.0" y="1042.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Sprint Pipeline Interface</text>
+  <text x="470.0" y="1052.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Gate approvals · milestone export</text>
+  <text x="470.0" y="1066.0" text-anchor="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#6b7280">Wrike <tspan font-size="15" dominant-baseline="text-bottom">★</tspan> · Smartsheet <tspan font-size="15" dominant-baseline="text-bottom">→</tspan></text>
+</g>
+<g>
+  <rect x="620.0" y="1018.0" data-node="I3" width="180.0" height="58" rx="3" fill="#eef2ff" stroke="#1e3a5f" stroke-width="1.5"/>
+  <rect x="728.0" y="1017" width="70" height="10" rx="2" fill="#fef3c7" stroke="#fbbf24" stroke-width="0.8"/>
+  <text x="763.0" y="1022.5" text-anchor="middle" dominant-baseline="middle" font-family="DM Sans,sans-serif" font-size="6.5" font-weight="700" fill="#92400e">ANALYST WORKSPACE</text>
+  <text x="710.0" y="1042.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Research & Authoring Env.</text>
+  <text x="710.0" y="1052.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Shared in-place · comment threading</text>
+  <text x="710.0" y="1066.0" text-anchor="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#6b7280">Claude Enterprise <tspan font-size="15" dominant-baseline="text-bottom">★</tspan> · Glean <tspan font-size="15" dominant-baseline="text-bottom">★</tspan></text>
+</g>
+<g>
+  <rect x="860.0" y="1018.0" data-node="I4" width="180.0" height="58" rx="3" fill="#eef2ff" stroke="#1e3a5f" stroke-width="1.5"/>
+  <rect x="968.0" y="1017" width="70" height="10" rx="2" fill="#fef3c7" stroke="#fbbf24" stroke-width="0.8"/>
+  <text x="1003.0" y="1022.5" text-anchor="middle" dominant-baseline="middle" font-family="DM Sans,sans-serif" font-size="6.5" font-weight="700" fill="#92400e">ANALYST WORKSPACE</text>
+  <text x="950.0" y="1042.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Proposal Scoring Env.</text>
+  <text x="950.0" y="1052.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Reviewer isolation · .xlsx export</text>
+  <text x="950.0" y="1066.0" text-anchor="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#6b7280">Qualtrics <tspan font-size="15" dominant-baseline="text-bottom">★</tspan> · custom <tspan font-size="15" dominant-baseline="text-bottom">⚙</tspan></text>
+</g>
+<g>
+  <rect x="1100.0" y="1018.0" data-node="I5" width="180.0" height="58" rx="3" fill="#eef2ff" stroke="#1e3a5f" stroke-width="1.5"/>
+  <rect x="1208.0" y="1017" width="70" height="10" rx="2" fill="#fef3c7" stroke="#fbbf24" stroke-width="0.8"/>
+  <text x="1243.0" y="1022.5" text-anchor="middle" dominant-baseline="middle" font-family="DM Sans,sans-serif" font-size="6.5" font-weight="700" fill="#92400e">ANALYST WORKSPACE</text>
+  <text x="1190.0" y="1042.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Content & Amplification WS</text>
+  <text x="1190.0" y="1052.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Transformation · back-channel prompt</text>
+  <text x="1190.0" y="1066.0" text-anchor="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#6b7280">Claude Enterprise <tspan font-size="15" dominant-baseline="text-bottom">★</tspan> · ElevenLabs <tspan font-size="15" dominant-baseline="text-bottom">★</tspan></text>
+</g>
+<g>
+  <rect x="1340.0" y="1018.0" data-node="I6" width="180.0" height="58" rx="3" fill="#eef2ff" stroke="#1e3a5f" stroke-width="1.5"/>
+  <rect x="1448.0" y="1017" width="70" height="10" rx="2" fill="#fef3c7" stroke="#fbbf24" stroke-width="0.8"/>
+  <text x="1483.0" y="1022.5" text-anchor="middle" dominant-baseline="middle" font-family="DM Sans,sans-serif" font-size="6.5" font-weight="700" fill="#92400e">ANALYST WORKSPACE</text>
+  <text x="1430.0" y="1042.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Monitoring Dashboard</text>
+  <text x="1430.0" y="1052.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Dual-mode: influence measurement</text>
+  <text x="1430.0" y="1062.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">signal coverage</text>
+  <text x="1430.0" y="1073.0" text-anchor="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#6b7280">Power BI <tspan font-size="15" dominant-baseline="text-bottom">★</tspan></text>
+</g>
+<g>
+  <rect x="1580.0" y="956.0" data-node="I7" width="180.0" height="120" rx="3" fill="#eef2ff" stroke="#1e3a5f" stroke-width="1.5"/>
+  <rect x="1688.0" y="955" width="70" height="10" rx="2" fill="#fef3c7" stroke="#fbbf24" stroke-width="0.8"/>
+  <text x="1723.0" y="960.5" text-anchor="middle" dominant-baseline="middle" font-family="DM Sans,sans-serif" font-size="6.5" font-weight="700" fill="#92400e">ANALYST WORKSPACE7</text>
+  <text x="1670.0" y="1001.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">AI Implementation Monitor</text>
+  <text x="1670.0" y="1011.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">DLQ · freshness · OCR · PIQ staleness · adapter health</text>
+  <text x="1670.0" y="1021.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Power BI <tspan font-size="15" dominant-baseline="text-bottom">★</tspan></text>
+  <text x="1670.0" y="1031.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">· Azure Monitor <tspan font-size="15" dominant-baseline="text-bottom">★</tspan></text>
+  <text x="1670.0" y="1041.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Health cockpit — 7 signal classes</text>
+</g>
+<g>
+  <rect x="140.0" y="1242.0" data-node="D1" width="220.0" height="42" rx="3" fill="#f5f3ff" stroke="#4f46e5" stroke-width="1.5"/>
+  <rect x="288.0" y="1241" width="70" height="10" rx="2" fill="#fef3c7" stroke="#fbbf24" stroke-width="0.8"/>
+  <text x="323.0" y="1246.5" text-anchor="middle" dominant-baseline="middle" font-family="DM Sans,sans-serif" font-size="6.5" font-weight="700" fill="#92400e">AMP WORKSPACE</text>
+  <text x="250.0" y="1258.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Content Management System</text>
+  <text x="250.0" y="1268.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Published research · EI · RPC website</text>
+  <text x="250.0" y="1281.0" text-anchor="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#6b7280">Acquia <tspan font-size="15" dominant-baseline="text-bottom">★</tspan></text>
+</g>
+<g>
+  <rect x="490.0" y="1242.0" data-node="D2" width="220.0" height="42" rx="3" fill="#f5f3ff" stroke="#4f46e5" stroke-width="1.5"/>
+  <rect x="638.0" y="1241" width="70" height="10" rx="2" fill="#fef3c7" stroke="#fbbf24" stroke-width="0.8"/>
+  <text x="673.0" y="1246.5" text-anchor="middle" dominant-baseline="middle" font-family="DM Sans,sans-serif" font-size="6.5" font-weight="700" fill="#92400e">AMP WORKSPACE</text>
+  <text x="600.0" y="1258.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Society & Community Platform</text>
+  <text x="600.0" y="1268.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Chapter communities · engagement</text>
+  <text x="600.0" y="1281.0" text-anchor="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#6b7280"><tspan font-size="15" dominant-baseline="text-bottom">→</tspan> TBD</text>
+</g>
+<g>
+  <rect x="840.0" y="1242.0" data-node="D3" width="220.0" height="42" rx="3" fill="#f5f3ff" stroke="#4f46e5" stroke-width="1.5"/>
+  <rect x="988.0" y="1241" width="70" height="10" rx="2" fill="#fef3c7" stroke="#fbbf24" stroke-width="0.8"/>
+  <text x="1023.0" y="1246.5" text-anchor="middle" dominant-baseline="middle" font-family="DM Sans,sans-serif" font-size="6.5" font-weight="700" fill="#92400e">AMP WORKSPACE</text>
+  <text x="950.0" y="1258.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Email & Newsletter</text>
+  <text x="950.0" y="1268.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Member briefings · open/click data</text>
+  <text x="950.0" y="1281.0" text-anchor="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#6b7280">Salesforce Marketing Cloud <tspan font-size="15" dominant-baseline="text-bottom">★</tspan></text>
+</g>
+<g>
+  <rect x="1190.0" y="1242.0" data-node="D4" width="220.0" height="42" rx="3" fill="#f5f3ff" stroke="#4f46e5" stroke-width="1.5"/>
+  <rect x="1338.0" y="1241" width="70" height="10" rx="2" fill="#fef3c7" stroke="#fbbf24" stroke-width="0.8"/>
+  <text x="1373.0" y="1246.5" text-anchor="middle" dominant-baseline="middle" font-family="DM Sans,sans-serif" font-size="6.5" font-weight="700" fill="#92400e">AMP WORKSPACE</text>
+  <text x="1300.0" y="1258.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">Board & Governance Portal</text>
+  <text x="1300.0" y="1268.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#4a4a46">Secure doc distribution · output only</text>
+  <text x="1300.0" y="1281.0" text-anchor="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#6b7280">SharePoint <tspan font-size="15" dominant-baseline="text-bottom">★</tspan></text>
+</g>
+<g>
+  <rect x="1540.0" y="1242.0" data-node="D5" width="220.0" height="42" rx="3" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+<path data-feedback="P2_M4" data-fb-tier="end" d="M1090.0,199.0 L1246.0,199.0 L1246.0,582.0" fill="none" stroke="#92400e" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#apiq)"/>
+<text x="1182.5" y="192.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#92400e">hypothesis queries</text>
+
+<path data-feedback="M05_OL" data-fb-tier="med" d="M1635.0,582.0 L1635.0,422.0" fill="none" stroke="#dc2626" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#aalert)"/>
+<text x="1643.0" y="502.0" text-anchor="start" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#dc2626">rejected records</text>
+<path data-feedback="PIQ_O7" data-fb-tier="med" d="M1290.0,688.0 L1290.0,872.0" fill="none" stroke="#92400e" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path data-feedback="PIQ_O7" data-fb-tier="med" d="M1290.0,872.0 L1400.0,872.0" fill="none" stroke="#92400e" stroke-width="1.3" stroke-dasharray="4,3"/>
+<path data-feedback="PIQ_O7" data-fb-tier="med" d="M1400.0,872.0 L1400.0,956.0" fill="none" stroke="#92400e" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#apiq)"/>
+<text x="1345.0" y="836.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#92400e">PIQ calibration alerts</text>
+
+  <text x="1650.0" y="1258.0" text-anchor="middle" dominant-baseline="middle" font-family="Libre Baskerville,serif" font-size="10" font-weight="700" fill="#1a1a18">External & Network Recipients</text>
+  <text x="1650.0" y="1268.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.8" fill="#92400e">Society leaders · practitioners · regulators</text>
+  <text x="1650.0" y="1281.0" text-anchor="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#6b7280">email / export</text>
+</g>
+
+<path data-feedback="P3_I7" data-fb-tier="med" d="M1758.5,183.0 L1852.0,183.0 L1852.0,1024.0 L1754.0,1024.0" fill="none" stroke="#dc2626" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#aalert)"/>
+
+<text x="1643.0" y="502.0" text-anchor="start" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#dc2626">rejected records</text>
+<text x="1765.0" y="176.0" text-anchor="start" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#dc2626">source freshness</text>
+<text x="615.0" y="264.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#1D9E75">transcription</text>
+<text x="615.0" y="289.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#1D9E75">failed records</text>
+<text x="1190.0" y="406.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#64748b">source freshness</text>
+<text x="1300.0" y="269.0" text-anchor="start" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#8a8a84">source freshness</text>
+<text x="1370.0" y="326.0" text-anchor="end" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#1D9E75">transcription</text>
+<text x="1370.0" y="380.0" text-anchor="end" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#1D9E75">failed records</text>
+<text x="1044.0" y="469.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#9d174d">threshold alerts</text>
+<text x="857.0" y="477.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#9d174d">gate decisions</text>
+<text x="970.0" y="500.0" text-anchor="start" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#8a8a84">PIQ re-scoring trigger</text>
+<text x="927.0" y="501.0" text-anchor="end" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#64748b">gate approval / threshold → distribute</text>
+<text x="1128.0" y="517.0" text-anchor="start" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7" fill="#1D9E75">OCR output</text>
+<text x="308.0" y="723.0" text-anchor="start" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#1D9E75">QA-verified records</text>
+<text x="400.0" y="741.0" text-anchor="start" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#92400e">PIQ assessment</text>
+<text x="1100.0" y="741.0" text-anchor="end" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#92400e">PIQ assessment</text>
+<text x="90.0" y="812.0" text-anchor="middle" dominant-baseline="middle" font-family="DM Mono,monospace" font-size="7.5" fill="#9d174d">analyst overrides</text>
+</svg>
+<div style="margin:0.6rem -2rem 0 -2rem;padding:0.5rem 2rem 0.3rem 2rem;border-top:1px solid #d4d0c8;font-family:'DM Mono',monospace;">
+
+<!-- Line legend -->
+<div style="display:flex;gap:1.6rem;align-items:center;flex-wrap:nowrap;margin-bottom:0.35rem;">
+  <span style="font-size:.5rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:#8a8a84;white-space:nowrap;">Lines</span>
+
+  <span style="display:flex;align-items:center;gap:4px;white-space:nowrap;">
+    <svg width="28" height="10"><line x1="0" y1="5" x2="20" y2="5" stroke="#1D9E75" stroke-width="1.5"/><polygon points="18,2 27,5 18,8" fill="#1D9E75"/></svg>
+    <span style="font-size:.5rem;color:#4a4a46;">Signal data flow</span>
+  </span>
+
+  <span style="display:flex;align-items:center;gap:4px;white-space:nowrap;">
+    <svg width="28" height="10"><line x1="0" y1="5" x2="20" y2="5" stroke="#4f46e5" stroke-width="1.5"/><polygon points="18,2 27,5 18,8" fill="#4f46e5"/></svg>
+    <span style="font-size:.5rem;color:#4a4a46;">Product delivery</span>
+  </span>
+
+  <span style="display:flex;align-items:center;gap:4px;white-space:nowrap;">
+    <svg width="28" height="10"><line x1="0" y1="5" x2="20" y2="5" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,2"/><polygon points="18,2 27,5 18,8" fill="#64748b"/></svg>
+    <span style="font-size:.5rem;color:#4a4a46;">Control &amp; orchestration</span>
+  </span>
+
+  <span style="display:flex;align-items:center;gap:4px;white-space:nowrap;">
+    <svg width="28" height="10"><line x1="0" y1="5" x2="20" y2="5" stroke="#92400e" stroke-width="1.5" stroke-dasharray="4,2"/><polygon points="18,2 27,5 18,8" fill="#92400e"/></svg>
+    <span style="font-size:.5rem;color:#4a4a46;">PIQ / human-in-loop</span>
+  </span>
+
+  <span style="display:flex;align-items:center;gap:4px;white-space:nowrap;">
+    <svg width="28" height="10"><line x1="0" y1="5" x2="20" y2="5" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,2"/><polygon points="18,2 27,5 18,8" fill="#dc2626"/></svg>
+    <span style="font-size:.5rem;color:#4a4a46;">Monitoring &amp; health alerts</span>
+  </span>
+
+  <span style="display:flex;align-items:center;gap:4px;white-space:nowrap;">
+    <svg width="28" height="10"><line x1="0" y1="5" x2="20" y2="5" stroke="#9d174d" stroke-width="1.5" stroke-dasharray="4,2"/><polygon points="18,2 27,5 18,8" fill="#9d174d"/></svg>
+    <span style="font-size:.5rem;color:#4a4a46;">Write-backs &amp; feedback</span>
+  </span>
+</div>
+
+<!-- Node legend -->
+<div style="display:flex;gap:1.6rem;align-items:center;flex-wrap:nowrap;margin-bottom:0.35rem;">
+  <span style="font-size:.5rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:#8a8a84;white-space:nowrap;">Nodes</span>
+
+  <span style="display:flex;align-items:center;gap:4px;white-space:nowrap;">
+    <span style="display:inline-block;width:14px;height:10px;border-radius:2px;background:#f0fdf4;border:1.5px solid #1D9E75;"></span>
+    <span style="font-size:.5rem;color:#4a4a46;">Signal source</span>
+  </span>
+
+  <span style="display:flex;align-items:center;gap:4px;white-space:nowrap;">
+    <span style="display:inline-block;width:14px;height:10px;border-radius:2px;background:#f0f5ff;border:1.5px solid #1e3a5f;"></span>
+    <span style="font-size:.5rem;color:#4a4a46;">Pull &amp; schedule</span>
+  </span>
+
+  <span style="display:flex;align-items:center;gap:4px;white-space:nowrap;">
+    <span style="display:inline-block;width:14px;height:10px;border-radius:2px;background:#f8fafc;border:1.5px solid #475569;"></span>
+    <span style="font-size:.5rem;color:#4a4a46;">Pre-processing</span>
+  </span>
+
+  <span style="display:flex;align-items:center;gap:4px;white-space:nowrap;">
+    <span style="display:inline-block;width:14px;height:10px;border-radius:2px;background:#1e293b;border:1.5px solid #94a3b8;"></span>
+    <span style="font-size:.5rem;color:#4a4a46;">Orchestration / processing</span>
+  </span>
+
+  <span style="display:flex;align-items:center;gap:4px;white-space:nowrap;">
+    <span style="display:inline-block;width:14px;height:10px;border-radius:2px;background:#f0fdf8;border:1.5px solid #085041;"></span>
+    <span style="font-size:.5rem;color:#4a4a46;">Repository layer</span>
+  </span>
+
+  <span style="display:flex;align-items:center;gap:4px;white-space:nowrap;">
+    <span style="display:inline-block;width:14px;height:10px;border-radius:2px;background:#eef2ff;border:1.5px solid #1e3a5f;"></span>
+    <span style="font-size:.5rem;color:#4a4a46;">Function output / interface</span>
+  </span>
+
+  <span style="display:flex;align-items:center;gap:4px;white-space:nowrap;">
+    <span style="display:inline-block;width:14px;height:10px;border-radius:2px;background:#f5f3ff;border:1.5px solid #4f46e5;"></span>
+    <span style="font-size:.5rem;color:#4a4a46;">Distribution</span>
+  </span>
+
+  <span style="display:flex;align-items:center;gap:4px;white-space:nowrap;margin-left:.6rem;border-left:1px solid #d4d0c8;padding-left:.8rem;">
+    <span style="font-size:.5rem;color:#4a4a46;">Title <span style="font-weight:700;">· M</span> = manual at this tier</span>
+  </span>
+  <span style="display:flex;align-items:center;gap:4px;white-space:nowrap;">
+    <span style="font-size:.5rem;color:#4a4a46;">Title <span style="font-weight:700;">· P</span> = partial at this tier</span>
+  </span>
+  <span style="display:flex;align-items:center;gap:4px;white-space:nowrap;">
+    <span style="font-size:.5rem;color:#4a4a46;">Title <span style="font-weight:700;color:#4f46e5;">· R</span> = tool revision planned at next stage</span>
+  </span>
+  <span style="display:flex;align-items:center;gap:4px;white-space:nowrap;margin-left:.6rem;border-left:1px solid #d4d0c8;padding-left:.8rem;">
+    <span style="font-size:.9rem;font-family:'DM Mono',monospace;font-weight:700;color:#4a4a46;">★</span>
+    <span style="font-size:.5rem;color:#4a4a46;">confirmed in CFA stack</span>
+  </span>
+  <span style="display:flex;align-items:center;gap:4px;white-space:nowrap;">
+    <span style="font-size:.9rem;font-family:'DM Mono',monospace;font-weight:700;color:#4a4a46;">→</span>
+    <span style="font-size:.5rem;color:#4a4a46;">suggested / TBD — see <a href="https://cfainstitute.atlassian.net/wiki/x/vobcGgE" style="color:#B45309;">Tool Research Log</a></span>
+  </span>
+  <span style="display:flex;align-items:center;gap:4px;white-space:nowrap;">
+    <span style="font-size:.9rem;font-family:'DM Mono',monospace;font-weight:700;color:#4a4a46;">⚙</span>
+    <span style="font-size:.5rem;color:#4a4a46;">custom build — see <a href="https://cfainstitute.atlassian.net/wiki/x/vYHQGgE" style="color:#4f46e5;">Build Register</a></span>
+  </span>
+</div>
+
+<!-- Footer: * note + Confluence links, single line -->
+<div style="font-size:.48rem;color:#8a8a84;font-style:italic;">
+  * Legal/operational clearance required before adapter activation (Q-LEG-1: CRM/Salesforce · Q-LEG-2: Audio/Video external events) &nbsp;·&nbsp; Format &amp; data type reference: <a href="https://cfainstitute.atlassian.net/wiki/x/F4BxHQE" style="color:#B45309;">/x/F4BxHQE</a> &nbsp;·&nbsp; Interface design requirements: <a href="https://cfainstitute.atlassian.net/wiki/x/JQBmHQE" style="color:#B45309;">/x/JQBmHQE</a> &nbsp;·&nbsp; Data governance &amp; legal: <a href="https://cfainstitute.atlassian.net/wiki/x/dwAvHQE" style="color:#B45309;">/x/dwAvHQE</a>
+</div>
+
+</div>
+<script id="diag-toggle-js">
+const nodeTiers={"SF":"all","SP":"all","SA":"med","SQ":"med","SE":"all","P1":"med","P2":"end","P3":"med","PP1":"all","PP2":"med","PP3":"med","PP4":"med","OL":"all","PP5":"med","M01":"all","M02":"med","M03":"med","M04":"med","M05":"med","PIQ":"all","RL1":"all","RL2":"med","RL3":"end","O1":"all","O2":"all","O3":"all","O4":"all","O5":"all","O6":"med","I1":"all","I2":"all","I3":"all","I4":"all","I5":"all","I6":"med","I7":"med","D1":"all","D2":"all","D3":"all","D4":"med","D5":"med"};
+const fbTiers={"D2D3_SE":"med","I123_RL":"med","I2_OL":"all","I6_OL":"med","PP5_I7":"med","M05_OL":"med","P3_I7":"med","PIQ_RL":"all","P2_M4":"end","PIQ_O7":"med"};
+const badgeData={"P1":{"mvp":"R","med":null},"RL3":{"mvp":"R","med":null},"PP4":{"mvp":null,"med":"R"},"SF":{"mvp":"P","med":null},"SP":{"mvp":"M","med":null},"PP1":{"mvp":"P","med":null},"OL":{"mvp":"P","med":null},"M01":{"mvp":"P","med":null},"PIQ":{"mvp":"M","med":null},"RL1":{"mvp":"M","med":null},"O1":{"mvp":"M","med":null},"O2":{"mvp":"M","med":null},"O3":{"mvp":"M","med":null},"O4":{"mvp":"M","med":null},"O5":{"mvp":"M","med":null},"I1":{"mvp":"P","med":null},"I3":{"mvp":"P","med":null},"I5":{"mvp":"P","med":null},"I6":{"mvp":null,"med":"P"},"D1":{"mvp":"M","med":null},"D2":{"mvp":"M","med":null},"D3":{"mvp":"M","med":null}};
+const nodeTitles={"SF":"Automated Feeds","SP":"Documents & Knowledge","SA":"Audio & Video *","SQ":"CRM, Quant & Geospatial *","SE":"Engagement & HUMINT","P1":"Scheduled Pull Engine","P2":"Proactive Signal Hypothesis Engine","P3":"Source Freshness Monitor","PP1":"Format Detection & Job Routing","PP2":"Async OCR Job","PP3":"Async Transcription Job","PP4":"Governance Hold","OL":"Orchestration Layer","PP5":"Dead-Letter Queue","M01":"M01 Format Extraction","M02":"M02 Normalization","M03":"M03 Entity Extraction & Tagging","M04":"M04 PIQ Scoring & Pre-scoring","M05":"M05 QA + Deduplication","PIQ":"PIQ Management Interface","RL1":"Layer 1 — Structured Records","RL2":"Layer 2 — Vector Store","RL3":"Layer 3 — Source Archive","O1":"Query pull","O2":"Push / event","O3":"Batch pull","O4":"Batch pull","O5":"Batch pull","O6":"Push / threshold","I7":"AI Implementation Monitor","I1":"Signal & Foresight Workspace","I2":"Sprint Pipeline Interface","I3":"Research & Authoring Env.","I4":"Proposal Scoring Env.","I5":"Content & Amplification WS","I6":"Monitoring Dashboard","D1":"Content Management System","D2":"Society & Community Platform","D3":"Email & Newsletter","D4":"Board & Governance Portal","D5":"External & Network Recipients"};
+
+const diagNotes={
+  mvp:"MVP — tool annotations shown · R = tool will be revised at next stage",
+  med:"MED — tool annotations shown · R = tool will be revised at next stage",
+  end:"End State — full AI-enabled system"
+};
+
+// Colours for badge letters
+const badgeColour={M:"#dc2626",P:"#B45309",R:"#4f46e5"};
+
+function setDiagTier(tier){
+  document.querySelectorAll('.diag-tier-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector('.diag-tier-btn.'+tier).classList.add('active');
+  document.getElementById('diag-tier-note').textContent=diagNotes[tier];
+  const svg=document.querySelector('svg');
+  if(!svg)return;
+
+  // Reset node opacity
+  svg.querySelectorAll('rect[data-node]').forEach(r=>r.style.opacity='');
+  svg.querySelectorAll('text').forEach(t=>t.style.opacity='');
+
+  // Dim inactive nodes + their texts
+  const dimmed=[];
+  svg.querySelectorAll('rect[data-node]').forEach(rect=>{
+    const t=nodeTiers[rect.getAttribute('data-node')];
+    const dim=(tier==='mvp'&&t!=='all')||(tier==='med'&&t==='end');
+    if(dim){rect.style.opacity='0.12';dimmed.push(rect);}
+  });
+  svg.querySelectorAll('text').forEach(text=>{
+    const tx=parseFloat(text.getAttribute('x')||0);
+    const ty=parseFloat(text.getAttribute('y')||0);
+    for(const r of dimmed){
+      const rx=parseFloat(r.getAttribute('x'));
+      const ry=parseFloat(r.getAttribute('y'));
+      const rw=parseFloat(r.getAttribute('width'));
+      const rh=parseFloat(r.getAttribute('height'));
+      if(tx>=rx-5&&tx<=rx+rw+5&&ty>=ry-2&&ty<=ry+rh+18){
+        text.style.opacity='0.12';break;
+      }
+    }
+  });
+
+  // Dim feedback paths
+  svg.querySelectorAll('path[data-fb-tier]').forEach(p=>{
+    const ft=p.getAttribute('data-fb-tier');
+    p.style.opacity=((tier==='mvp'&&ft!=='all')||(tier==='med'&&ft==='end'))?'0.12':'';
+  });
+
+  // Update badge letters in node title texts
+  // For each node with a badge, find its title text element and prepend/remove the letter
+  svg.querySelectorAll('text[data-node-title]').forEach(textEl=>{
+    const nid=textEl.getAttribute('data-node-title');
+    const bd=badgeData[nid];
+    const baseTitle=nodeTitles[nid]||textEl.getAttribute('data-base-title')||'';
+    if(!bd){ textEl.textContent=baseTitle; return; }
+    const badgeType=bd[tier]||null;
+    const baseFill=textEl.getAttribute('data-base-fill')||'#1a1a18';
+    if(badgeType){
+      textEl.textContent=baseTitle+' · '+badgeType;
+    }else{
+      textEl.textContent=baseTitle;
+    }
+    textEl.setAttribute('fill',baseFill);
+  });
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  // Stamp title text elements with data-node-title attributes
+  const svg=document.querySelector('svg');
+  if(!svg)return;
+
+  // For each node with a badge, find its title text and stamp it
+  const titleNodes=Object.keys(badgeData);
+  svg.querySelectorAll('text').forEach(textEl=>{
+    const content=textEl.textContent.trim();
+    for(const nid of titleNodes){
+      const expected=nodeTitles[nid]||'';
+      if(content===expected||content===expected.replace(/&amp;/g,'&')){
+        textEl.setAttribute('data-node-title',nid);
+        textEl.setAttribute('data-base-title',content);
+        textEl.setAttribute('data-base-fill',textEl.getAttribute('fill')||'#1a1a18');
+        break;
+      }
+    }
+  });
+
+  document.querySelectorAll('.diag-tier-btn').forEach(btn=>{
+    btn.addEventListener('click',function(){
+      const t=this.classList.contains('mvp')?'mvp':this.classList.contains('med')?'med':'end';
+      setDiagTier(t);
+    });
+  });
+  setDiagTier('end');
+});
+</script>
+</body></html>
